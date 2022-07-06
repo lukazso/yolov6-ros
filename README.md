@@ -4,6 +4,8 @@ This repo contains a ROS noetic package for YOLOv6. It wraps the [official
 implementation](https://github.com/meituan/YOLOv6) into a ROS node (so most credit 
 goes to the YOLOv6 creators).
 
+![Example image from RVIZ](rviz_dogs.png)
+
 ## Requirements & Getting Started
 
 Following ROS packages are required:
