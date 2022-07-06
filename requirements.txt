@@ -1,0 +1,1 @@
+yolov6 @ git+https://github.com/lukazso/YOLOv6.git

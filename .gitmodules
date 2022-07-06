@@ -1,0 +1,3 @@
+[submodule "src/yolov6"]
+	path = src/yolov6
+	url = https://github.com/meituan/YOLOv6.git
