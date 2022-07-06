@@ -28,7 +28,7 @@ Download the YOLOv6 weights from the [official repository](https://github.com/me
 The package has been tested under Ubuntu 20.04 and Python 3.8.10.
 
 ## Usage
-Before you launch the file, adjust the parameters in the 
+Before you launch the node, adjust the parameters in the 
 [launch file](launch/yolov6.launch). For example, you need to set the path to your 
 YOLOv6 weights and the image topic to which this node should listen to. The launch 
 file also contains a description for each parameter.
