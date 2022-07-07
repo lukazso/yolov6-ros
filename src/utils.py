@@ -2,7 +2,8 @@ import rospy
 import torch
 from std_msgs.msg import Header
 from sensor_msgs.msg import Image
-from vision_msgs.msg import Detection2DArray, Detection2D, BoundingBox2D
+from vision_msgs.msg import Detection2DArray, Detection2D, BoundingBox2D, \
+    ObjectHypothesisWithPose
 from geometry_msgs.msg import Pose2D
 
 
@@ -46,6 +47,12 @@ def create_detection_msg(img_msg: Image, detections: torch.Tensor) -> Detection2
         bbox.center.y = cy
 
         single_detection_msg.bbox = bbox
+
+        # class id & confidence
+        obj_hyp = ObjectHypothesisWithPose()
+        obj_hyp.id = int(cls)
+        obj_hyp.score = conf
+        single_detection_msg.results = [obj_hyp]
 
         detection_array_msg.detections.append(single_detection_msg)
 
