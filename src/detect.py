@@ -122,7 +122,7 @@ class Yolov6Publisher:
             detections = self.model.inference(img)
             detections[:, :4] = Inferer.rescale(
                 [h_scaled, w_scaled], detections[:, :4], [h_orig, w_orig])
-            detections = detections.round()
+            detections[:, :4] = detections[:, :4].round()
 
             # publishing
             detection_msg = create_detection_msg(img_msg, detections)
