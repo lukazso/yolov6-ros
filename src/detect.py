@@ -66,6 +66,7 @@ class Yolov6Publisher:
             the original img size.
         """
         self.img_size = img_size
+        self.device = device
 
         vis_topic = pub_topic + "visualization" if pub_topic.endswith("/") else \
             pub_topic + "/visualization"
@@ -113,7 +114,7 @@ class Yolov6Publisher:
         img = torch.from_numpy(np.ascontiguousarray(img))
         img = img.float()  # uint8 to fp16/32
         img /= 255  # 0 - 255 to 0.0 - 1.
-        img = img.to(device)
+        img = img.to(self.device)
 
         # inference & rescaling the output to original img size
         detections = self.model.inference(img)
