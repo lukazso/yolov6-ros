@@ -139,7 +139,7 @@ class Yolov6Publisher:
 if __name__ == "__main__":
     rospy.init_node("yolov6_node")
 
-    ns = "/yolov6/detect/"
+    ns = rospy.get_name() + "/"
 
     weights_path = rospy.get_param(ns + "weights_path")
     img_topic = rospy.get_param(ns + "img_topic")
