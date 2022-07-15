@@ -1,7 +1,7 @@
 <launch>
     <node pkg="yolov6-ros" type="detect.py" name="detect" output="screen" ns="yolov6">
         <!-- Download the official weights from the original repo -->
-        <param name="weights_path" type="str" value="$(find yolov6-ros)/weights/yolov6s.pt" />
+        <param name="weights_path" type="str" value="$(find yolov6-ros)/weights/yolov6t.pt" />
         <!-- topic name to subscribe to -->
         <param name="img_topic" type="str" value="/camera/color/image_raw" />
         <!-- topic name for the detection output -->
@@ -19,5 +19,8 @@
         <param name="visualize" type="bool" value="true" />
         <!-- 'cuda' or 'cpu' -->
         <param name="device" type="str" value="cuda" />
+        <!-- for now only coco names -->
+        <param name="yaml" type="str" value="$(find yolov6-ros)/conf/coco.yaml" />
+
     </node>
 </launch>
