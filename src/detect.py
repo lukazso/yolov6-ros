@@ -21,6 +21,24 @@ from utils import create_detection_msg
 from visualizer import draw_detections
 
 
+def rescale(ori_shape: Tuple[int, int], boxes: Union[torch.Tensor, np.ndarray],
+            target_shape: Tuple[int, int]):
+    """Rescale the output to the original image shape
+    :param ori_shape: original width and height [width, height].
+    :param boxes: original bounding boxes as a torch.Tensor or np.array or shape
+        [num_boxes, >=4], where the first 4 entries of each element have to be
+        [x1, y1, x2, y2].
+    :param target_shape: target width and height [width, height].
+    """
+    xscale = target_shape[1] / ori_shape[1]
+    yscale = target_shape[0] / ori_shape[0]
+
+    boxes[:, [0, 2]] *= xscale
+    boxes[:, [1, 3]] *= yscale
+
+    return boxes
+
+
 class YoloV6:
     def __init__(self, weights, conf_thresh: float = 0.5, iou_thresh: float = 0.45,
                  device: str = "cuda"):
@@ -118,7 +136,7 @@ class Yolov6Publisher:
 
         # inference & rescaling the output to original img size
         detections = self.model.inference(img)
-        detections[:, :4] = Inferer.rescale(
+        detections[:, :4] = rescale(
             [h_scaled, w_scaled], detections[:, :4], [h_orig, w_orig])
         detections[:, :4] = detections[:, :4].round()
 
