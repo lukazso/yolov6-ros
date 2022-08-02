@@ -3,7 +3,7 @@
         <!-- Download the official weights from the original repo -->
         <param name="weights_path" type="str" value="$(find yolov6-ros)/weights/yolov6t.pt" />
         <!-- topic name to subscribe to -->
-        <param name="img_topic" type="str" value="/camera/color/image_raw" />
+        <param name="img_topic" type="str" value="/zed2i/zed_node/left_raw/image_raw_color" />
         <!-- topic name for the detection output -->
         <param name="out_topic" type="str" value="yolov6" />
         <!-- confidence threshold -->
@@ -21,6 +21,5 @@
         <param name="device" type="str" value="cuda" />
         <!-- for now only coco names -->
         <param name="yaml" type="str" value="$(find yolov6-ros)/conf/coco.yaml" />
-
     </node>
 </launch>

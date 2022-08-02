@@ -113,13 +113,16 @@ class Yolov6Publisher:
         # w_scaled = w_orig - (w_orig % 8)
         np_img_resized = cv2.resize(np_img_orig, (w_scaled, h_scaled))
 
-        # conversion to torch tensor (copied from original yolov6 repo)
+        # conversion to torch tensor (copied from original yolov6 repo
+        if np_img_resized.shape[2] == 4: #Removing extra channel if RGBA
+            np_img_resized = np_img_resized[:,:,:3]
         img = np_img_resized.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
         img = torch.from_numpy(np.ascontiguousarray(img))
         img = img.float()  # uint8 to fp16/32
         img /= 255  # 0 - 255 to 0.0 - 1.
         img = img.to(self.device)
 
+        
         # inference & rescaling the output to original img size
         detections = self.model.inference(img)
         
